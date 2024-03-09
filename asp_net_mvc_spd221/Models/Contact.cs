@@ -1,6 +1,6 @@
 ﻿namespace asp_net_mvc_spd221.Controllers
 {
-    internal class Contact
+    public class Contact
     {
         public int Id { get; set; }
         public string Name { get; set; }
