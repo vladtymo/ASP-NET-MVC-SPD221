@@ -1,8 +1,14 @@
+using asp_net_mvc_spd221.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // add custom services
+
+// configure db context
+//builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer());
 
 var app = builder.Build();
 

@@ -10,6 +10,7 @@ namespace asp_net_mvc_spd221.Controllers
         public ProductsController()
         {
             context = new ShopDbContext();
+            //this.context = context;
         }
 
         public IActionResult Index()
@@ -20,6 +21,20 @@ namespace asp_net_mvc_spd221.Controllers
             return View(products);
         }
 
+        // ...
         // create/edit/delete/find
+        // ...
+
+        public IActionResult Delete(int id)
+        {
+            var item = context.Products.Find(id);
+
+            if (item == null) return NotFound();
+
+            context.Products.Remove(item);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
