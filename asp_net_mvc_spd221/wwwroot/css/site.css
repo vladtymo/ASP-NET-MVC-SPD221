@@ -20,3 +20,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#product-table td img {
+    border-radius: 6px;
+    transition: .3s;
+}
+#product-table td img:hover {
+    transform: scale(3);
+}
