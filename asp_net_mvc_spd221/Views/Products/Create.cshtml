@@ -21,19 +21,21 @@
             <input asp-for=Discount type="number" min="0" max="100" step="5" class="form-control" placeholder="Enter product discount">
         </div>
     </div>
+
+    <div class="col-md-4">
+        <label asp-for="CategoryId" for="inputState" class="form-label">Category</label>
+        <select asp-for="CategoryId" asp-items=ViewBag.Categories id="inputState" class="form-select">
+            <option selected>Choose...</option>
+        </select>
+    </div>
+    <div class="col-md-8">
+        <label asp-for=ImageUrl for="inputEmail4" class="form-label">Image URL</label>
+        <input asp-for=ImageUrl type="url" class="form-control" placeholder="Enter product image address" id="inputEmail4">
+    </div>
+
     <div class="col-md-12 mb-3">
         <label asp-for=Description for="exampleFormControlTextarea1" class="form-label">Description</label>
         <textarea asp-for=Description class="form-control" id="exampleFormControlTextarea1" placeholder="Enter product description" rows="3"></textarea>
-    </div>
-
-    <div class="col-md-3">
-        <label asp-for=CategoryId for="inputEmail4" class="form-label">Category ID</label>
-        <input asp-for=CategoryId type="number" class="form-control" placeholder="Enter product category" id="inputEmail4">
-    </div>
-
-    <div class="col-md-9">
-        <label asp-for=ImageUrl for="inputEmail4" class="form-label">Image URL</label>
-        <input asp-for=ImageUrl type="url" class="form-control" placeholder="Enter product image address" id="inputEmail4">
     </div>
 
     <div class="col-12">
@@ -46,7 +48,7 @@
     </div>
    
     <div class="col-6">
-        <button type="button" class="btn btn-dark w-100">Go Back</button>
+        <a asp-action="Index" class="btn btn-dark w-100">Go Back</a>
     </div>
     <div class="col-6">
         <button type="submit" class="btn btn-success w-100">Create</button>
