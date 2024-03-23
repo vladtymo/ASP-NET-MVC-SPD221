@@ -34,7 +34,14 @@
                         <span class="badge bg-primary">SALE</span>
                     }
                 </td>
-                <td>@i.Price$</td>
+                <td>
+                    @if(i.Discount > 0)
+                    {
+                        <del class="small">@i.Price$</del><br />
+                        
+                    }
+                    @(i.Price - (i.Price * i.Discount / 100M))$
+                </td>
                 <td>@(i.Category?.Name ?? "not loaded")</td>
                 <td>@i.Discount%</td>
                 <td>
