@@ -47,6 +47,28 @@ namespace asp_net_mvc_spd221.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Edit(int id)
+        {
+            var item = context.Products.Find(id);
+            if (item == null) return NotFound();
+
+            var categories = new SelectList(context.Categories.ToList(), nameof(Product.Id), nameof(Product.Name));
+            ViewBag.Categories = categories;
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product model)
+        {
+            // TODO: add model validation
+
+            context.Products.Update(model);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Delete(int id)
         {
             var item = context.Products.Find(id);
