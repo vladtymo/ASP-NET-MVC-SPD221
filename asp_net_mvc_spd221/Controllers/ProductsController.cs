@@ -10,14 +10,17 @@ namespace asp_net_mvc_spd221.Controllers
     {
         private ShopDbContext context;
 
-        public ProductsController()
+        public ProductsController(ShopDbContext context)
         {
-            context = new ShopDbContext();
-            //this.context = context;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
+            const int a = 10;
+
+            const string str = "aergaer";
+
             // get products from db
             // .Include() - LEFT JOIN
             var products = context.Products.Include(x => x.Category).ToList();

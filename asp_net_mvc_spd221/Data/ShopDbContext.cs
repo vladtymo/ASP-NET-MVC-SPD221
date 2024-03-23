@@ -9,14 +9,15 @@ namespace asp_net_mvc_spd221.Data
         {
             //this.Database.EnsureCreated();    
         }
+        public ShopDbContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
 
-            var connStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopMvcSpd221;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
-            optionsBuilder.UseSqlServer(connStr);
-        }
+        //    var connStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopMvcSpd221;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        //    optionsBuilder.UseSqlServer(connStr);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

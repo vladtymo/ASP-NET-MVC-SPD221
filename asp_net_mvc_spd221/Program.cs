@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string connStr = builder.Configuration.GetConnectionString("LocalDb")!;
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // add custom services
 
 // configure db context
-//builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer());
+builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connStr));
 
 var app = builder.Build();
 
