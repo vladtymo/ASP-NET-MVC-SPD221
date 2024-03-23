@@ -1,4 +1,5 @@
 ﻿using asp_net_mvc_spd221.Data;
+using asp_net_mvc_spd221.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asp_net_mvc_spd221.Controllers
@@ -21,9 +22,20 @@ namespace asp_net_mvc_spd221.Controllers
             return View(products);
         }
 
-        // ...
-        // create/edit/delete/find
-        // ...
+        [HttpGet] // by default
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product model)
+        {
+            context.Products.Add(model);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
 
         public IActionResult Delete(int id)
         {
