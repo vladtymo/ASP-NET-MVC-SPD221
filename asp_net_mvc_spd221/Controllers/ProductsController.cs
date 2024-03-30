@@ -18,15 +18,27 @@ namespace asp_net_mvc_spd221.Controllers
 
         public IActionResult Index()
         {
-            const int a = 10;
-
-            const string str = "aergaer";
-
             // get products from db
             // .Include() - LEFT JOIN
             var products = context.Products.Include(x => x.Category).ToList();
 
+            LoadCategories();
+
             return View(products);
+        }
+
+        public IActionResult Filter(int? categoryId)
+        {
+            if (categoryId == null)
+                return RedirectToAction("Index");
+
+            var products = context.Products
+                            .Include(x => x.Category)
+                            .Where(x => x.CategoryId == categoryId)
+                            .ToList();
+
+            LoadCategories();
+            return View("Index", products);
         }
 
         [HttpGet] // by default

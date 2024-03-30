@@ -5,12 +5,15 @@
 
 <div class="d-flex gap-2">
     <a asp-controller="Products" asp-action="Create" class="btn btn-primary">Create New Product</a>
-    <div class="col-md-4 ms-auto">
-        <select id="inputState" class="form-select">
+
+    <form class="d-flex ms-auto gap-2" asp-action="Filter" ms-auto>
+      
+        <select name="categoryId" asp-items=ViewBag.Categories id="inputState" class="form-select">
             <option selected>All Categories</option>
         </select>
-    </div>
-    <a class="btn btn-secondary">Filter</a>
+        
+        <button type="submit" class="btn btn-secondary">Filter</button>
+    </form>
 </div>
 
 
