@@ -1,8 +1,11 @@
-﻿@model EditProductModel;
+﻿@model ProductModel;
+@{
+    bool isCreate = Model == null;
+}
 
-<h2>Edit Product</h2>
+<h2>@(isCreate ? "Create" : "Edit") Product</h2>
 
-<form class="row g-3" asp-action="Edit" method="post">
+<form class="row g-3" asp-action="@(isCreate ? "Create" : "Edit")" method="post">
     <div class="col-md-12">
         <label asp-for=Name class="form-label">Name</label>
         <input asp-for="Name" type="text" class="form-control" placeholder="Enter product name">
@@ -57,6 +60,13 @@
         <a asp-action="Index" class="btn btn-dark w-100">Go Back</a>
     </div>
     <div class="col-6">
-        <button type="submit" class="btn btn-warning w-100">Edit</button>
+        @if (isCreate)
+        {
+            <button type="submit" class="btn btn-success w-100">Create</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-warning w-100">Edit</button>
+        }
     </div>
 </form>

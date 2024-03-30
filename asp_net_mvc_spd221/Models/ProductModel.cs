@@ -2,10 +2,10 @@
 
 namespace asp_net_mvc_spd221.Models
 {
-    public class EditProductModel
+    public class ProductModel
     {
         public int Id { get; set; }
-        [MinLength(2)]
+        [MinLength(2, ErrorMessage = "Name must be at least 2 characters.")]
         public string Name { get; set; }
 
         [Range(0, int.MaxValue)]

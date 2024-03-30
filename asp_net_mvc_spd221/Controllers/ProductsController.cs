@@ -51,16 +51,16 @@ namespace asp_net_mvc_spd221.Controllers
 
             LoadCategories();
 
-            return View();
+            return View("Upsert");
         }
 
         [HttpPost]
-        public IActionResult Create(CreateProductModel model)
+        public IActionResult Create(ProductModel model)
         {
             if (!ModelState.IsValid)
             {
                 LoadCategories();
-                return View(model);
+                return View("Upsert", model);
             }
 
             //var entity = new Product()
@@ -88,18 +88,18 @@ namespace asp_net_mvc_spd221.Controllers
 
             LoadCategories();
 
-            var model = mapper.Map<EditProductModel>(item);
+            var model = mapper.Map<ProductModel>(item);
 
-            return View(model);
+            return View("Upsert",model);
         }
 
         [HttpPost]
-        public IActionResult Edit(EditProductModel model)
+        public IActionResult Edit(ProductModel model)
         {
             if (!ModelState.IsValid)
             {
                 LoadCategories();
-                return View(model);
+                return View("Upsert", model);
             }
 
             var entity = mapper.Map<Product>(model);

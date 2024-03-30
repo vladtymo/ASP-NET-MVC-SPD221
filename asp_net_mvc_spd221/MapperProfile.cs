@@ -8,8 +8,7 @@ namespace asp_net_mvc_spd221
     {
         public MapperProfile()
         {
-            CreateMap<CreateProductModel, Product>();
-            CreateMap<EditProductModel, Product>().ReverseMap();
+            CreateMap<ProductModel, Product>().ReverseMap();
         }
     }
 }
