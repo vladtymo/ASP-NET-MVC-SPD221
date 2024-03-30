@@ -1,18 +1,24 @@
+using asp_net_mvc_spd221.Data;
 using asp_net_mvc_spd221.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace asp_net_mvc_spd221.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly ShopDbContext context;
+
+        public HomeController(ShopDbContext context)
         {
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View(); // ~/Views/Home/Index.cshtml
+            var items = context.Products.Include(x => x.Category).ToList();
+            return View(items); // ~/Views/Home/Index.cshtml
         }
 
         public IActionResult Privacy()

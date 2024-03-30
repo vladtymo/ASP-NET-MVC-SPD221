@@ -6,6 +6,10 @@
 <p>This is ASP.NET Core MVC Educational Application for SPD221 Group</p>
 <button type="button" class="btn btn-success">Push Me</button>
 
+<div class="text-center mb-2">
+    <a asp-controller="Contacts" asp-action="Index" type="button" class="btn btn-primary">Show Contacts</a>
+</div>
+
 <div>
     @for (int i = 0; i < 7; i++)
     {

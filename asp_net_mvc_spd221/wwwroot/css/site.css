@@ -28,3 +28,8 @@ body {
 #product-table td img:hover {
     transform: scale(3);
 }
+
+.card img {
+    object-fit: contain;
+    margin: 6px;
+}
