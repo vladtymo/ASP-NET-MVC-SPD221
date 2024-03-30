@@ -90,7 +90,7 @@ namespace asp_net_mvc_spd221.Controllers
 
             var model = mapper.Map<ProductModel>(item);
 
-            return View("Upsert",model);
+            return View("Upsert", model);
         }
 
         [HttpPost]
