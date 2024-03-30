@@ -1,5 +1,6 @@
 ﻿using asp_net_mvc_spd221.Data;
 using asp_net_mvc_spd221.Data.Entities;
+using asp_net_mvc_spd221.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -33,18 +34,32 @@ namespace asp_net_mvc_spd221.Controllers
         {
             // ViewBag - transfer data from action to view
 
-            var categories = new SelectList(context.Categories.ToList(), nameof(Product.Id), nameof(Product.Name));
-            ViewBag.Categories = categories;
+            LoadCategories();
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Product model)
+        public IActionResult Create(CreateProductModel model)
         {
-            // TODO: add model validation
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View(model);
+            }
 
-            context.Products.Add(model);
+            var entity = new Product()
+            {
+                Name = model.Name,
+                CategoryId = model.CategoryId,
+                Description = model.Description,
+                Discount = model.Discount,
+                ImageUrl = model.ImageUrl,
+                InStock = model.InStock,
+                Price = model.Price
+            };
+
+            context.Products.Add(entity);
             context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -55,18 +70,45 @@ namespace asp_net_mvc_spd221.Controllers
             var item = context.Products.Find(id);
             if (item == null) return NotFound();
 
-            var categories = new SelectList(context.Categories.ToList(), nameof(Product.Id), nameof(Product.Name));
-            ViewBag.Categories = categories;
+            LoadCategories();
 
-            return View(item);
+            var model = new EditProductModel()
+            {
+                Id = item.Id,
+                Name = item.Name,
+                CategoryId = item.CategoryId,
+                Description = item.Description,
+                Discount = item.Discount,
+                ImageUrl = item.ImageUrl,
+                InStock = item.InStock,
+                Price = item.Price
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product model)
+        public IActionResult Edit(EditProductModel model)
         {
-            // TODO: add model validation
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View(model);
+            }
 
-            context.Products.Update(model);
+            var entity = new Product()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                CategoryId = model.CategoryId,
+                Description = model.Description,
+                Discount = model.Discount,
+                ImageUrl = model.ImageUrl,
+                InStock = model.InStock,
+                Price = model.Price
+            };
+
+            context.Products.Update(entity);
             context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -82,6 +124,12 @@ namespace asp_net_mvc_spd221.Controllers
             context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private void LoadCategories()
+        {
+            var categories = new SelectList(context.Categories.ToList(), nameof(Product.Id), nameof(Product.Name));
+            ViewBag.Categories = categories;
         }
     }
 }
