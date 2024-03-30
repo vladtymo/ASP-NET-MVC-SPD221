@@ -1,6 +1,7 @@
 ﻿using asp_net_mvc_spd221.Data;
 using asp_net_mvc_spd221.Data.Entities;
 using asp_net_mvc_spd221.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +11,12 @@ namespace asp_net_mvc_spd221.Controllers
     public class ProductsController : Controller
     {
         private ShopDbContext context;
+        private readonly IMapper mapper;
 
-        public ProductsController(ShopDbContext context)
+        public ProductsController(ShopDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -60,16 +63,17 @@ namespace asp_net_mvc_spd221.Controllers
                 return View(model);
             }
 
-            var entity = new Product()
-            {
-                Name = model.Name,
-                CategoryId = model.CategoryId,
-                Description = model.Description,
-                Discount = model.Discount,
-                ImageUrl = model.ImageUrl,
-                InStock = model.InStock,
-                Price = model.Price
-            };
+            //var entity = new Product()
+            //{
+            //    Name = model.Name,
+            //    CategoryId = model.CategoryId,
+            //    Description = model.Description,
+            //    Discount = model.Discount,
+            //    ImageUrl = model.ImageUrl,
+            //    InStock = model.InStock,
+            //    Price = model.Price
+            //};
+            var entity = mapper.Map<Product>(model);
 
             context.Products.Add(entity);
             context.SaveChanges();
@@ -84,17 +88,7 @@ namespace asp_net_mvc_spd221.Controllers
 
             LoadCategories();
 
-            var model = new EditProductModel()
-            {
-                Id = item.Id,
-                Name = item.Name,
-                CategoryId = item.CategoryId,
-                Description = item.Description,
-                Discount = item.Discount,
-                ImageUrl = item.ImageUrl,
-                InStock = item.InStock,
-                Price = item.Price
-            };
+            var model = mapper.Map<EditProductModel>(item);
 
             return View(model);
         }
@@ -108,17 +102,7 @@ namespace asp_net_mvc_spd221.Controllers
                 return View(model);
             }
 
-            var entity = new Product()
-            {
-                Id = model.Id,
-                Name = model.Name,
-                CategoryId = model.CategoryId,
-                Description = model.Description,
-                Discount = model.Discount,
-                ImageUrl = model.ImageUrl,
-                InStock = model.InStock,
-                Price = model.Price
-            };
+            var entity = mapper.Map<Product>(model);
 
             context.Products.Update(entity);
             context.SaveChanges();

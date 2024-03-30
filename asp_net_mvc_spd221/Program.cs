@@ -1,5 +1,6 @@
 using asp_net_mvc_spd221.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddControllersWithViews();
 
 // configure db context
 builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connStr));
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
