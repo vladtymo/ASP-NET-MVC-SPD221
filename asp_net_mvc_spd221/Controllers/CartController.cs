@@ -53,7 +53,15 @@ namespace asp_net_mvc_spd221.Controllers
 
         public IActionResult Remove(int id)
         {
-            return View();
+            // отримуємо дані з корзини
+            var ids = HttpContext.Session.Get<List<int>>(WebConstants.CART_KEY);
+
+            if (ids != null) ids.Remove(id);
+
+            // зберігаємо новий список в корзині
+            HttpContext.Session.Set(WebConstants.CART_KEY, ids);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
