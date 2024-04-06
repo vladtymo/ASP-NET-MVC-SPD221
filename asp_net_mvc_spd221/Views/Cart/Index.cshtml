@@ -47,7 +47,10 @@
             }
         </ol>
         <div class="text-end mt-2">
-            <a asp-action="Clear" hidden="@isEmpty" class="btn btn-outline-danger btn-sm">Clear Cart</a>
+            <a asp-action="Clear" hidden="@isEmpty" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-x-square-fill"></i>
+                <span>Clear Cart</span>
+            </a>
         </div>
 
         <a href="#" hidden="@isEmpty" class="btn btn-success mt-3">Confirm Order</a>
