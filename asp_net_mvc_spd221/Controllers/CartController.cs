@@ -22,7 +22,7 @@ namespace asp_net_mvc_spd221.Controllers
 
         public IActionResult Index()
         {
-            var ids = HttpContext.Session.Get<List<int>>("cart");
+            var ids = HttpContext.Session.Get<List<int>>(WebConstants.CART_KEY);
             if (ids == null) ids = new List<int>();
 
             var entities = context.Products
@@ -37,7 +37,7 @@ namespace asp_net_mvc_spd221.Controllers
         public IActionResult Append(int id)
         {
             // отримуємо дані з корзини
-            var ids = HttpContext.Session.Get<List<int>>("cart");
+            var ids = HttpContext.Session.Get<List<int>>(WebConstants.CART_KEY);
 
             // якщо корзина порожня, створюємо список
             if (ids == null) ids = new List<int>();
@@ -46,7 +46,7 @@ namespace asp_net_mvc_spd221.Controllers
             ids.Add(id);
 
             // зберігаємо новий список в корзині
-            HttpContext.Session.Set("cart", ids);
+            HttpContext.Session.Set(WebConstants.CART_KEY, ids);
 
             return RedirectToAction("Index", "Home");
         }
@@ -58,7 +58,9 @@ namespace asp_net_mvc_spd221.Controllers
 
         public IActionResult Clear()
         {
-            return View();
+            HttpContext.Session.Remove(WebConstants.CART_KEY);
+
+            return RedirectToAction("Index");
         }
     }
 }

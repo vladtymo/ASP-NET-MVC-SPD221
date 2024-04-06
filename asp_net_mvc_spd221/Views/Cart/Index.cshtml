@@ -1,4 +1,8 @@
 ﻿@model List<ProductCartModel>
+@{
+    decimal totalPrice = Model.Sum(x => x.Price);
+    bool isEmpty = !Model.Any();
+}
 
 <div class="card text-center">
     <div class="card-header">
@@ -7,6 +11,11 @@
     <div class="card-body">
         <h5 class="card-title">Product List</h5>
        
+        @if(isEmpty)
+        {
+            <p>Your cart is empty</p>
+        }
+
         <ol class="list-group list-group-numbered">
             @foreach (var i in Model)
             {
@@ -27,10 +36,14 @@
                 </li>
             }
         </ol>
+        <div class="text-end mt-2">
+            <a asp-action="Clear" hidden="@isEmpty" class="btn btn-outline-danger btn-sm">Clear Cart</a>
+        </div>
 
-        <a href="#" class="btn btn-success mt-3">Confirm Order</a>
+        <a href="#" hidden="@isEmpty" class="btn btn-success mt-3">Confirm Order</a>
+        <a asp-controller="Home" class="btn btn-outline-primary mt-3">Continue Shopping</a>
     </div>
     <div class="card-footer text-muted">
-        Total Price: @Model.Sum(x => x.Price)$
+        Total Price: <span class="badge bg-primary">@totalPrice$</span>
     </div>
 </div>
