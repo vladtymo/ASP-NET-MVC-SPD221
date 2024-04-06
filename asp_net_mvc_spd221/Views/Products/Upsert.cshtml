@@ -1,6 +1,6 @@
 ﻿@model ProductModel;
 @{
-    bool isCreate = Model == null;
+    bool isCreate = ViewBag.Creation ?? false;
 }
 
 <h2>@(isCreate ? "Create" : "Edit") Product</h2>

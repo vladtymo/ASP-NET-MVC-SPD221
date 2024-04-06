@@ -49,6 +49,7 @@ namespace asp_net_mvc_spd221.Controllers
         {
             // ViewBag - transfer data from action to view
 
+            ViewBag.Creation = true;
             LoadCategories();
 
             return View("Upsert");
@@ -60,6 +61,7 @@ namespace asp_net_mvc_spd221.Controllers
             if (!ModelState.IsValid)
             {
                 LoadCategories();
+                ViewBag.Creation = true;
                 return View("Upsert", model);
             }
 
@@ -86,6 +88,7 @@ namespace asp_net_mvc_spd221.Controllers
             var item = context.Products.Find(id);
             if (item == null) return NotFound();
 
+            ViewBag.Creation = false;
             LoadCategories();
 
             var model = mapper.Map<ProductModel>(item);
@@ -99,6 +102,7 @@ namespace asp_net_mvc_spd221.Controllers
             if (!ModelState.IsValid)
             {
                 LoadCategories();
+                ViewBag.Creation = false;
                 return View("Upsert", model);
             }
 
