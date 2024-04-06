@@ -2,7 +2,7 @@
 
 namespace asp_net_mvc_spd221.Models
 {
-    public class ProductModel
+    public class ProductFormModel
     {
         public int Id { get; set; }
         [MinLength(2, ErrorMessage = "Name must be at least 2 characters.")]

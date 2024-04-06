@@ -56,7 +56,7 @@ namespace asp_net_mvc_spd221.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductModel model)
+        public IActionResult Create(ProductFormModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -91,13 +91,13 @@ namespace asp_net_mvc_spd221.Controllers
             ViewBag.Creation = false;
             LoadCategories();
 
-            var model = mapper.Map<ProductModel>(item);
+            var model = mapper.Map<ProductFormModel>(item);
 
             return View("Upsert", model);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductModel model)
+        public IActionResult Edit(ProductFormModel model)
         {
             if (!ModelState.IsValid)
             {
