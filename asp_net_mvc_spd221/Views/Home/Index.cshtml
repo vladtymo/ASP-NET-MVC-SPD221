@@ -15,9 +15,12 @@
                             @i.Price$ - @i.Category?.Name
                         </p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer d-flex justify-content-between">
+                        <input style="width: 100px" type="number" min="1" value="1" class="form-control">
                         <small class="text-muted">
-                            <a asp-controller="Cart" asp-action="Append" asp-route-id="@i.Id" class="btn btn-primary">Add to Cart</a>
+                            <a asp-controller="Cart" asp-action="Append" asp-route-id="@i.Id" asp-route-id="@i.Id" class="btn btn-primary">
+                                Add to Cart
+                            </a>
                         </small>
                     </div>
                 </div>

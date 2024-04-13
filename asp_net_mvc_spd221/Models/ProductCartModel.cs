@@ -9,5 +9,7 @@
         public bool InStock { get; set; }
         public string ImageUrl { get; set; }
         public string CategoryName { get; set; }
+        public int Quantity { get; set; }
+        public int CountToBuy { get; set; }
     }
 }

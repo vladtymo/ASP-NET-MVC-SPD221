@@ -16,7 +16,7 @@ namespace asp_net_mvc_spd221.Models
 
         [Range(0, 100)]
         public int Discount { get; set; }
-        public bool InStock { get; set; }
+        public int Quantity { get; set; }
 
         [Url]
         public string ImageUrl { get; set; }

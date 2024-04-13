@@ -9,6 +9,7 @@
         public int Discount { get; set; }
         public bool InStock { get; set; }
         public string ImageUrl { get; set; }
+        public int Quantity { get; set; }
 
         public int CategoryId { get; set; }
 

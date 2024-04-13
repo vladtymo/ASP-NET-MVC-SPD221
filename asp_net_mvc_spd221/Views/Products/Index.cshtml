@@ -27,7 +27,7 @@
             <th scope="col">Price</th>
             <th scope="col">Category</th>
             <th scope="col">Discount</th>
-            <th scope="col">Status</th>
+            <th scope="col">Quantity</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -58,13 +58,14 @@
                 <td>@(i.Category?.Name ?? "not loaded")</td>
                 <td>@i.Discount%</td>
                 <td>
-                    @if(i.InStock)
+                    @if (i.Quantity > 0)
                     {
-                        <span class="badge bg-success">In Stock</span>
+                       @*  <span class="badge bg-success">In Stock</span> *@
+                        <span class="badge bg-success">@i.Quantity</span>
                     }
                     else
                     {
-                        <span class="badge bg-secondary">Out of Stock</span>
+                        <span class="badge bg-secondary">X</span>
                     }
                 </td>
                 <td>

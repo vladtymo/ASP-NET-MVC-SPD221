@@ -1,6 +1,8 @@
 using asp_net_mvc_spd221.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
+using asp_net_mvc_spd221.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddControllersWithViews();
 
 // configure db context
 builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connStr));
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ShopDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDistributedMemoryCache();
@@ -42,6 +47,7 @@ app.UseAuthorization();
 
 app.UseSession();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

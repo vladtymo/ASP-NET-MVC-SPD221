@@ -1,9 +1,10 @@
 ﻿using asp_net_mvc_spd221.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace asp_net_mvc_spd221.Data
 {
-    public class ShopDbContext : DbContext
+    public class ShopDbContext : IdentityDbContext<User>
     {
         public ShopDbContext() 
         {
@@ -22,6 +23,8 @@ namespace asp_net_mvc_spd221.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Product>().Property(x => x.Quantity).HasDefaultValue(0);
 
             modelBuilder.Entity<Category>().HasData(new[]
             {
