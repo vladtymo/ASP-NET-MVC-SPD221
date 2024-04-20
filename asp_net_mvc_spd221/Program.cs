@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using asp_net_mvc_spd221.Data.Entities;
+using asp_net_mvc_spd221.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,14 @@ builder.Services.AddControllersWithViews();
 // configure db context
 builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<User, IdentityRole>(
+    options => 
+        options.SignIn.RequireConfirmedAccount = true
+    )
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
     .AddEntityFrameworkStores<ShopDbContext>();
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDistributedMemoryCache();
@@ -29,6 +36,14 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    SeedExtensions.SeedRoles(serviceProvider).Wait();
+    SeedExtensions.SeedAdmin(serviceProvider).Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
