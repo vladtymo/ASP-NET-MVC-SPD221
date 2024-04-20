@@ -18,7 +18,7 @@ builder.Services.AddDbContext<ShopDbContext>(opt => opt.UseSqlServer(connStr));
 
 builder.Services.AddIdentity<User, IdentityRole>(
     options => 
-        options.SignIn.RequireConfirmedAccount = true
+        options.SignIn.RequireConfirmedAccount = false
     )
     .AddDefaultTokenProviders()
     .AddDefaultUI()

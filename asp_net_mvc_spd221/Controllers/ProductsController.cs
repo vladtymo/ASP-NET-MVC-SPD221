@@ -2,12 +2,14 @@
 using asp_net_mvc_spd221.Data.Entities;
 using asp_net_mvc_spd221.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace asp_net_mvc_spd221.Controllers
 {
+    [Authorize(Roles = Roles.ADMIN)]
     public class ProductsController : Controller
     {
         private ShopDbContext context;

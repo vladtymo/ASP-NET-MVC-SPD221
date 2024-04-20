@@ -30,9 +30,13 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a>
                         </li>
                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index">Products</a>
-                        </li>
+                        @if(User.IsInRole(Roles.ADMIN))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Products" asp-action="Index">Products</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">My Cart</a>
                         </li>
