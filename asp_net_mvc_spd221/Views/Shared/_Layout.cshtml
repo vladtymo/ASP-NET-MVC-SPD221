@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using asp_net_mvc_spd221.Services
+@inject ICartService cartService;
+
+@{
+    int cartSize = cartService.GetCount();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -38,7 +45,13 @@
                         }
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">My Cart</a>
+                            <a class="nav-link text-dark" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart4"></i>
+                                @if (cartSize > 0)
+                                {
+                                    <span class="badge rounded-pill bg-success">@cartSize</span>
+                                }
+                            </a>
                         </li>
                     </ul>
 

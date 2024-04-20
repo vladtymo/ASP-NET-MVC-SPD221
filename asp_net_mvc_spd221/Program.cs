@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using asp_net_mvc_spd221.Data.Entities;
 using asp_net_mvc_spd221.Extensions;
+using asp_net_mvc_spd221.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddScoped<ICartService, CartService>();
 
 var app = builder.Build();
 

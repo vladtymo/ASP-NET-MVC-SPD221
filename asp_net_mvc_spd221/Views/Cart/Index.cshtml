@@ -42,7 +42,9 @@
                             </div>
                         </div>
                         <div class="ms-4">
+                            <a><i class="btn bi bi-dash"></i></a>
                             <span class="badge bg-secondary">@i.CountToBuy</span>
+                            <a asp-controller="Cart" asp-action="Append" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path"><i class="btn bi bi-plus"></i></a>
                         </div>
                     </div>
                     <span class="badge bg-primary rounded-pill">@(i.Price * i.CountToBuy)$</span>

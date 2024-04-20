@@ -6,6 +6,7 @@ using asp_net_mvc_spd221.Data.Entities;
 using AutoMapper;
 using asp_net_mvc_spd221.Models;
 using Microsoft.EntityFrameworkCore;
+using asp_net_mvc_spd221.Services;
 
 namespace asp_net_mvc_spd221.Controllers
 {
@@ -13,11 +14,13 @@ namespace asp_net_mvc_spd221.Controllers
     {
         private readonly ShopDbContext context;
         private readonly IMapper mapper;
+        private readonly ICartService cartService;
 
-        public CartController(ShopDbContext context, IMapper mapper)
+        public CartController(ShopDbContext context, IMapper mapper, ICartService cartService)
         {
             this.context = context;
             this.mapper = mapper;
+            this.cartService = cartService;
         }
 
         public IActionResult Index()
@@ -40,23 +43,14 @@ namespace asp_net_mvc_spd221.Controllers
             return View(list);
         }
 
-        public IActionResult Append(int id, int count = 1)
+        public IActionResult Append(int id, int count = 1, string? returnUrl = null)
         {
-            // отримуємо дані з корзини
-            var items = HttpContext.Session.Get<Dictionary<int, int>>(WebConstants.CART_KEY);
+            cartService.Append(id, count);
 
-            // якщо корзина порожня, створюємо список
-            if (items == null) items = new Dictionary<int, int>();
-
-            // якщо елемент вже в корзині, тоді збільшуємо кількість
-            if (items.ContainsKey(id)) items[id] += count;
-            // якщо ні, додаємо новий елемент
-            else items.Add(id, count);
-
-            // зберігаємо новий список в корзині
-            HttpContext.Session.Set(WebConstants.CART_KEY, items);
-
-            return RedirectToAction("Index", "Home");
+            if (returnUrl != null) 
+                return Redirect(returnUrl);
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Remove(int id)
